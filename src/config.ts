@@ -10,6 +10,12 @@ import type {
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
+// Helper function to get CDN URL based on environment variable
+// Usage: CDN=CN pnpm build
+const getCDNUrl = (cnUrl: string, dfUrl: string) => {
+	return import.meta.env.CDN === 'CN' ? cnUrl : dfUrl;
+}
+
 export const siteConfig: SiteConfig = {
 	title: "AcoFork Blog",
 	subtitle: "技术分享与实践",
@@ -43,6 +49,10 @@ export const siteConfig: SiteConfig = {
 		repeat: "no-repeat", // Background repeat: 'no-repeat', 'repeat', 'repeat-x', 'repeat-y'
 		attachment: "fixed", // Background attachment: 'fixed', 'scroll', 'local'
 		opacity: 1, // Background opacity (0-1)
+		randomBackgroundScript: getCDNUrl(
+			"https://pic.acofork.com/random.js", // CN CDN
+			"https://pic.2x.nz/random.js"        // Default/Global CDN
+		), 
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post
@@ -57,7 +67,7 @@ export const siteConfig: SiteConfig = {
 		},
 	],
 	officialSites: [
-		{ url: "https://acofork.com", alias: "EdgeOne CN" },
+		{ url: "https://acofork.com", alias: "CN" },
 		{ url: "https://2x.nz", alias: "Global" },
 	],
 };
@@ -121,7 +131,10 @@ export const imageFallbackConfig: ImageFallbackConfig = {
 
 export const umamiConfig: UmamiConfig = {
 	enable: true,
-	baseUrl: "https://umami.2x.nz",
+	baseUrl: getCDNUrl(
+		"https://esa-umami.acofork.com", // CN CDN
+		"https://umami.2x.nz"           // Default/Global CDN
+	),
 	shareId: "CdkXbGgZr6ECKOyK",
 	timezone: "Asia/Shanghai",
 };

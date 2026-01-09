@@ -31,6 +31,7 @@ export type SiteConfig = {
 		repeat?: "no-repeat" | "repeat" | "repeat-x" | "repeat-y";
 		attachment?: "fixed" | "scroll" | "local";
 		opacity?: number;
+		randomBackgroundScript?: string;
 	};
 	toc: {
 		enable: boolean;

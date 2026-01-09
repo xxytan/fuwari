@@ -115,7 +115,9 @@ const bannerOffset =
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<script src="/js/umami-share.js" defer></script>
-		<script data-swup-ignore-script is:inline src="https://pic.2x.nz/random.js"></script>
+		{siteConfig.background.randomBackgroundScript && (
+			<script data-swup-ignore-script is:inline src={siteConfig.background.randomBackgroundScript}></script>
+		)}
 		
 		
 		
